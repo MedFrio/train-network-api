@@ -1,0 +1,20 @@
+{
+  "name": "train-network-api",
+  "version": "1.0.0",
+  "description": "Réaliser une API en NodeJS avec Express et une base de données MongoDB permettant de gérer des sites ferroviaires selon le principe suivant : une “ligneˮ de train dessert plusieurs villes et plusieurs gares.\r Une gare peut être desservie par plusieurs lignes. Une gare peut se trouver dans deux villes (comme la gare de Réaumont / Saint Cassien) et une ville peut avoir une ou plusieurs gares. \r Chaque ligne ferroviaire est définie par une nature (tourisme ou fret, par exemple).",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  }
+}
