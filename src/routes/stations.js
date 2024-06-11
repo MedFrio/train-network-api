@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Station = require('../models/Station');
+const authenticate = require('../middleware/authenticate'); // Importe le middleware d'authentification
+
+// Middleware d'authentification appliqué à toutes les routes de cette routeur
+router.use(authenticate);
 
 // Get all stations
 router.get('/', async (req, res) => {
