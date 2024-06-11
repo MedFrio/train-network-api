@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const { JWT_SECRET } = require('../config/config');
 const User = require('../models/User');
 
 // Route for user registration
@@ -38,7 +39,7 @@ router.post('/login', async (req, res) => {
     }
 
     // Generate a JWT token
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
 
     res.json({ token });
   } catch (err) {
@@ -47,4 +48,27 @@ router.post('/login', async (req, res) => {
   }
 });
 
-module.exports = router;
+// Middleware function to verify JWT token
+const authenticate = (req, res, next) => {
+
+    // Get the token from the header
+  const token = req.header('Authorization');
+
+  if (!token) {
+    console.error("No token found");
+    return res.status(401).json({ message: 'Accès non autorisé. Token manquant.' });
+  }
+
+  try {
+    // Verify the token
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.user = decoded.user;
+    console.log("User authenticated:", req.user);
+    next();
+  } catch (err) {
+    console.error(err);
+    res.status(401).json({ message: 'Token invalide.' });
+  }
+};
+
+module.exports = { router, authenticate };
