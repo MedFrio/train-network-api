@@ -22,7 +22,7 @@ npm install
 
 4. Configurez votre base de données MongoDB dans le fichier index.js:
 
-MONGODB_URI=mongodb://localhost:27017/trainnetwork
+  MONGODB_URI=mongodb://localhost:27017/trainnetwork
 
 
 ## Utilisation
